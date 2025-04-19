@@ -6,7 +6,15 @@
     <title>HFE Landing Page</title>
     <link rel="icon" type="image/x-icon" href="https://green2gold.org/wp-content/uploads/2024/12/Screenshot-2024-12-13-045829-e1734056212417.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--Scroll Behaviour-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        /* Prevent horizontal scroll and overflow */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
         body {
             font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
@@ -78,31 +86,7 @@
             color: #ffd700;
             transition: opacity 0.5s ease-in-out;
         }
-        .carousel-section {
-            margin: 20px 0;
-        }
-        .carousel-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .carousel-container {
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            position: relative;
-            overflow: hidden;
-        }
-        .carousel-image {
-            width: 100%;
-            height: auto;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .carousel-info {
-            text-align: center;
-            margin-top: 10px;
-        }
+       
         #product-name {
             font-size: 20px;
             font-weight: bold;
@@ -216,8 +200,8 @@
         }
         .cornucopia {
             position: absolute;
-            left: 40px;
-            top: 90px;
+            left: 60px;
+            top: 110px;
             width: 22vw;
             max-width: 300px;
             min-width: 120px;
@@ -290,7 +274,7 @@
             .category-item:nth-child(4) { top: 75px; left: 25px; transform: rotate(15deg); }
         }
         @media (max-width: 576px) {
-            .cornucopia { width: 25vw; min-width: 80px; top: 70px; max-width: 150px; transform: rotate(15deg); left: 10px; }
+            .cornucopia { width: 25vw; min-width: 80px; top: 100px; max-width: 150px; transform: rotate(15deg); left: 5px; }
             .category-spill-container { top: 150px; left: 60px; width: 200px; height: 150px; transform: translate(-40px, -60px) scale(0.5) rotate(-15deg); }
             .category-item { font-size: 0.6em; padding: 5px 8px; }
             .category-item:nth-child(1) { top: 5px; left: 0px; transform: rotate(-22deg) translateX(-4px); }
@@ -298,9 +282,204 @@
             .category-item:nth-child(3) { top: 50px; left: 15px; transform: rotate(10deg); }
             .category-item:nth-child(4) { top: 70px; left: 20px; transform: rotate(18deg); }
         }
+
+        /* Coming soon in 2025 styles */
+        /* Banner container */
+        .banner-container {
+            position: relative;
+            width: 250px; /* Explicit width for consistency */
+            top: 10px;
+            left: 0px;
+            z-index: 1000;
+        }
+        /* Banner styles */
+        .coming-soon-banner {
+            background: linear-gradient(to right, #ffd700, #ffcc33);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: rotate(-20deg);
+            transform-origin: left center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        /* Text styles */
+        .banner-text {
+            color: #228B22; /* Forest Green */
+            font-weight: 600;
+            font-size: 1.25rem;
+            transition: font-size 0.3s ease;
+        }
+        /* Arrow styles */
+        .banner-arrow {
+            width: 20px;
+            height: 20px;
+            stroke: #228B22; /* Forest Green */
+            animation: pulse 2s infinite;
+        }
+        /* Pulse animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .banner-container {
+                top: -20px;
+                left: -15px;
+                width: 190px;
+            }
+            .coming-soon-banner {
+                padding: 8px 16px;
+                transform: rotate(-19deg);
+            }
+            .banner-text {
+                font-size: 0.9rem;
+            }
+            .banner-arrow {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .banner-container {
+                top: -30px;
+                left: -15px;
+                width: 150px;
+            }
+            .coming-soon-banner {
+                padding: 6px 12px;
+                transform: rotate(-20deg);
+            }
+            .banner-text {
+                font-size: 0.7rem;
+            }
+            .banner-arrow {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        /* --- View a selection of Upcoming Products Styles --- */
+        .product-spotlight-section {
+             margin-top: 40px;
+             width: 100%;
+             max-width: 1000px; /* Allow more width for grid */
+             margin-left: auto;
+             margin-right: auto;
+        }
+        .carousel-title {
+            font-size: 1.2em;
+            color: var(--medium-text);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px; /* More space below title */
+             text-align: center; /* Ensure title is centered */
+        }
+        .product-grid {
+            display: flex;
+            justify-content: center; /* Center items horizontally */
+            align-items: flex-start; /* Align items to top */
+            gap: 30px; /* Space between items */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .product-item {
+            flex: 0 1 280px; /* Flex basis, allow shrinking, set max width */
+            text-align: center;
+            background-color: #288c24; /* Subtle background */
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .product-image {
+            width: 100%;
+            max-height: 200px; /* Consistent height */
+            object-fit: contain;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #409c3c;
+             /* Force image load - remove if causing issues */
+             /* opacity: 1 !important; */
+        }
+        .product-info {
+             /* Styles for text container below image */
+        }
+        .product-name { /* Renamed from #product-name */
+            font-size: 1.15em;
+            color: var(--white-text);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .product-description { /* Renamed from #product-description */
+            font-size: 0.9em;
+            color: var(--medium-text);
+            font-weight: 300;
+            line-height: 1.5; /* Adjust line height for description */
+        }
+
+        /* Our Story Highlights Styles */
+        /* Carousel indicators styling */
+        .carousel-indicators li {
+            background-color: #228b22 !important;
+            opacity: 0.7;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            margin: 0 0.4rem;
+            border: none !important;
+            transition: opacity 0.3s ease;
+        }
+        /* Active indicator styles */
+        .carousel-indicators .active {
+            background-color: #ffd700 !important;
+            opacity: 1;
+        }
+
+        /* Use arrows to explore more slides */
+        @keyframes fadeBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-hint {
+            animation: fadeBounce 1.5s ease-in-out infinite;
+            color: #002366;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
+<!--Navigation Bar-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(34, 139, 34, 0.9); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -318,9 +497,24 @@
         </div>
     </div>
 </nav>
+<!--End of Navigation Bar-->
 
+
+<!--Home Section-->
 <section id="home">
-    <img src="cart_pushing_robot.png" alt="Cart Robot" class="cart-robot">
+    <!-- Coming Soon Banner -->
+    <div class="banner-container">
+        <div class="coming-soon-banner">
+            <span class="banner-text">Coming soon in 2025</span>
+            <svg class="banner-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </div>
+    </div>
+    <!--Robot-->
+    <img src="cart_pushing_robot_v3.png" alt="Cart Robot" class="cart-robot">
+    <!--Cornucopia-->
     <img src="cc.png" alt="cornucopia" class="cornucopia">
     <div class="category-spill-container">
         <span class="category-item">Organic Foods</span>
@@ -328,21 +522,48 @@
         <span class="category-item">Sustainable Fashion</span>
         <span class="category-item">Green Tech</span>
     </div>
-    <img style="margin-top: -50px;" src="https://green2gold.org/wp-content/uploads/2024/12/Screenshot-2024-12-13-045829-e1734056212417.png" alt="Fourth Slide">
+    <!--Logo-->
+    <img style="margin-top: -50px;" src="https://green2gold.org/wp-content/uploads/2024/12/Screenshot-2024-12-13-045829-e1734056212417.png" alt="Logo">
+
     <h1 style="margin-bottom: 10px;">Welcome to HarmFree Emporium<sup style="font-size:12px; vertical-align: 0.8em;">TM</sup></h1>
     <i><p style="font-size: 30px;">HarmFree to <span id="dynamic-text">Humans</span></p></i>
-    <div class="carousel-section">
+
+    <!-- Product Display Section -->
+    <div class="product-spotlight-section fade-in-section" style="transition-delay: 0.3s;">
         <h2 class="carousel-title">View a selection of Upcoming Products</h2>
-        <div class="carousel-container">
-            <img id="daily-image" class="carousel-image" src="" alt="Upcoming Product">
-            <div class="carousel-info">
-                <h3 id="product-name"></h3>
-                <p id="product-description"></p>
+        <!-- NEW Container for side-by-side products -->
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-item">
+                <img class="product-image" src="https://www.divina.store/cdn/shop/files/Valentines2025BathSalts_grande.jpg?v=1735688026" alt="Product 1">
+                <div class="product-info">
+                    <h3 class="product-name">SOOTHE BioRF Sea Shell Bath Salts by DIVINA</h3>
+                    <p class="product-description">Elevate your senses with the SOOTHE BioRF Sók Salts Gift Box where ancient salts, healing botanicals, and music powered frequencies unite in a sea shell of serenity.</p>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-item">
+                <img class="product-image" src="https://lovemypod.com/wp-content/uploads/2024/06/L.O.V.E-Baby-Pods2-1.png" alt="Product 2">
+                <div class="product-info">
+                    <h3 class="product-name">L.O.V.E. Pod</h3>
+                    <p class="product-description">Born from indigenous brilliance, the L.O.V.E. Pod brings clean, private internet—to the people, by the people, for the people—restoring connection, sovereignty, and digital dignity to underserved communities worldwide.</p>
+            </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-item">
+                <img class="product-image" src="https://zstand.com/cdn/shop/products/sportster-black_720x.jpg?v=1556601444" alt="Product3">
+                <div class="product-info">
+                    <h3 class="product-name">ZStand</h3>
+                    <p class="product-description">The award-winning, ultra-flexible stand born from artistic genius delivering ergonomic freedom, industrial strength, and style to any space. A sleek, portable workstation for work, play, and everything between.</p>
+            </div>
             </div>
         </div>
     </div>
-    <div id="bannerCarousel" class="carousel slide" data-interval="false">
 
+    <!--Story Highlights Section-->
+    <div style="margin-top: 40px;">
+    <h3 class="carousel-title">Our Story Highlights</h3>
+    <div id="bannerCarousel" class="carousel slide" data-interval="false">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
@@ -393,23 +614,35 @@
         </a>
     </div>
 
+    <p class="text-center text-sm mt-2 animate-hint"> ← Use arrows to explore more slides → </p>
+</div>
 </section>
+<!--End of Home Section-->
 
-<section id="about">
+
+<!--About Section-->
+<section id="about" data-aos="fade-right">
     <h2>About Us</h2>
-    <p>At Harmfree Emporium, we are passionate about offering products that not only enhance your lifestyle but also contribute to the well-being of our planet. Our curated collection features a diverse range of eco-friendly and sustainable products that blend quality, innovation, and environmental responsibility. Stay tuned for our new e-commerce platform launch!</p>
+    <p>At Harmfree Emporium, we are passionate about offering products that not only enhance your lifestyle but also contribute to the well-being of our planet. Our curated collection features a diverse range of eco-friendly and sustainable products that blend quality, innovation, and environmental responsibility. Whether you're looking for everyday essentials or unique finds, we strive to provide a shopping experience that aligns with your values. Exciting things are on the horizon as we build a brand-new e-commerce platform to bring you the best deals and a seamless shopping experience. Stay tuned! Join us on our journey to create a cleaner, greener future, and discover products that make a positive impact on both you and the world around you.</p>
 </section>
+<!--End of About Section-->
 
-<section id="countdown">
+
+<!--Countdown Section-->
+<section id="countdown" data-aos="fade-left">
     <h2>Launch Countdown</h2>
     <div id="countdown-timer">00:00:00</div>
     <div id="launch-message" style="display: none;">
-        <p>Launched! The wait is over. <a href="https://www.harmfreeemporium.org" target="_blank">Click here</a> to explore!</p>
+        <p>Launched! The wait is over. <!-- <a href="https://www.harmfreeemporium.org" target="_blank">Click here</a> to explore! --></p>
     </div>
 </section>
+<!--End of Countdown Section-->
 
-<section id="contact">
-    <h2>Contact Us</h2>
+
+<!--Contact Us-->
+<section id="contact" data-aos="fade-right">
+    <h2>Get In Touch</h2>
+     <p>Feel free to fill out the form below if you're interested in offering sponsorships, staying updated about our website as a buyer, or selling your eco-friendly products through our platform.</p>
     <form id="contact-form" action="https://formspree.io/f/manyzgoe" method="post">
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
@@ -440,49 +673,117 @@
         <button type="submit">Submit</button>
     </form>
 </section>
+<!--End of Contact Us-->
 
-<section id="contact-info">
+
+<!--Contact Info Section-->
+<section id="contact-info" data-aos="fade-left">
     <h2>Contact Information</h2>
     <p>Phone: <a href="tel:+18057357261">+1 805 735 7261</a></p>
     <p>Email: <a href="mailto:alan@green2gold.org">alan@green2gold.org</a></p>
 </section>
+<!--End of Contact Info Section-->
 
+
+<!--Footer-->
 <footer>
     &copy; 2024/2025 HarmFree Emporium. All Rights Reserved. | Website by Michelle Thuo.
 </footer>
+<!--End of Footer-->
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Navbar-->
 <script>
 function closeNavbar(){
     document.getElementById('navbarNav').classList.remove('show');
 }
 </script>
+
+<!--View a selection of Upcoming Products-->
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-    const products = [
-        { image: "https://th.bing.com/th/id/OIP.R67QKzP19RVfL4K_Ht9W9AHaHa?rs=1&pid=ImgDetMain", name: "Eco-Friendly Bottle", description: "A sustainable water bottle made from bamboo." },
-        { image: "https://th.bing.com/th/id/R.aba1ab0928811dfeff71b7a4acb30776?rik=wZMlbRr35646UA&pid=ImgRaw&r=0", name: "Smart Plant Monitor", description: "Monitors soil moisture and helps your plants thrive." },
-        { image: "https://th.bing.com/th/id/OIP.Aa9BoYAczx--FX6NaM3O4QHaHa?rs=1&pid=ImgDetMain", name: "Solar-Powered Charger", description: "Charge your devices anywhere with solar energy." }
-    ];
-    const imageElement = document.getElementById("daily-image");
-    const nameElement = document.getElementById("product-name");
-    const descElement = document.getElementById("product-description");
-    const today = new Date().toDateString();
-    let storedData = JSON.parse(localStorage.getItem("dailyImage")) || {};
-    if (storedData.date !== today) {
-        const newIndex = (storedData.index + 1 || 0) % products.length;
-        storedData = { date: today, index: newIndex };
-        localStorage.setItem("dailyImage", JSON.stringify(storedData));
-    }
-    const selectedProduct = products[storedData.index];
-    imageElement.src = selectedProduct.image;
-    nameElement.textContent = selectedProduct.name;
-    descElement.textContent = selectedProduct.description;
-    imageElement.onload = () => imageElement.style.opacity = 1;
-});
+  const products = [
+    {
+      image: "https://www.divina.store/cdn/shop/files/Valentines2025BathSalts_grande.jpg?v=1735688026",
+      name: "SOOTHE BioRF Sea Shell Bath Salts by DIVINA",
+      description: "Elevate your senses with the SOOTHE BioRF Sók Salts Gift Box where ancient salts, healing botanicals, and music powered frequencies unite in a sea shell of serenity."
+    },
+    {
+      image: "https://lovemypod.com/wp-content/uploads/2024/06/L.O.V.E-Baby-Pods2-1.png",
+      name: "L.O.V.E. Pod",
+      description: "Born from indigenous brilliance, the L.O.V.E. Pod brings clean, private internet—to the people, by the people, for the people—restoring connection, sovereignty, and digital dignity to underserved communities worldwide."
+    },
+    {
+      image: "https://zstand.com/cdn/shop/products/sportster-black_720x.jpg?v=1556601444",
+      name: "ZStand",
+      description: "The award-winning, ultra-flexible stand born from artistic genius delivering ergonomic freedom, industrial strength, and style to any space. A sleek, portable workstation for work, play, and everything between."
+    },
+    {
+      image: "https://littletoes.com/cdn/shop/files/S-DiapersFrontView_65dac94d-2132-48b9-abaa-5b0edbcf1f68_1000x.jpg?v=1693341814",
+      name: "BambooBaby Diapers by Products on the Go",
+      description: "BambooBaby diapers are 100% biodegradable, hypoallergenic, and ultra-absorbent, offering gentle, eco-friendly care with unmatched softness and odor control."
+    },
+    {
+      image: "https://agrosonics.store/image/cache/catalog/AgroSonic%20no%20background%20copy%202-500x500-100x100.jpg",
+      name: "Agrosonics",
+      description: "Agro Sonics uses sound frequencies to accelerate growth, enhance nutrient absorption, and boost yields, ensuring healthier, faster-growing crops with improved quality and reduced harvest time."
+    },
+    {
+      image: "https://surecart.com/cdn-cgi/image/fit=scale-down,format=auto,width=768/https://media.surecart.com/m3q9hv02ijkacu6uehr7j32jqhfv",
+      name: "Xoto scooter",
+      description: "XOTO is a revolutionary 3-wheeled electric vehicle with self-stabilizing back wheels, offering unmatched stability, a 45-mile range, and front-wheel drive. Perfect for urban commuting or leisure, XOTO makes every ride smarter, safer, and more fun."
+    },
+    {
+      image: "https://dogtorrx.com/wp-content/uploads/2024/07/DogtorRX-AD-bottle-3D.jpg",
+      name: "DogtorRX Pet supplement",
+      description: "DogtorRx, clinically tested and veterinarian-approved, uses natural growth factors to rejuvenate aging dogs with orthopedic issues and Cushing’s Disease, supporting lasting health—side-effect free."
+    },
+    {
+      image: "https://shop.gtechsport.com/cdn/shop/files/image_13b1767e-04e7-4208-ad83-14904d265a6b_360x.jpg?v=1682440196",
+      name: "Gtech sport sanitizer",
+      description: "GTech eliminates germs, mold, and odors, offering up to 15 days of protection on high-touch surfaces. From homes to offices and vehicles, enjoy a cleaner, safer space with minimal effort."
+    },
+    {
+      image: "https://static.wixstatic.com/media/a5b4d7_c36689b7be2e4d89bc9e4a17ca90d936~mv2_d_3024_2268_s_2.jpg/v1/crop/x_0,y_199,w_3024,h_1870/fill/w_482,h_295,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/a5b4d7_c36689b7be2e4d89bc9e4a17ca90d936~mv2_d_3024_2268_s_2.jpg",
+      name: "CHERP solar panel",
+      description: "CHERP panels are the safest, most advanced solar solution eliminating hotspots and built in nonprofit micro-factories in underserved U.S. communities. By creating jobs, driving energy equity, and powering low-income homes, CHERP is redefining solar—community-built, community-powered."
+   }
+  ];
+
+  let currentIndex = 0;
+
+  function updateProducts() {
+    const productItems = document.querySelectorAll(".product-item");
+
+    // Fade out
+    productItems.forEach(item => item.classList.remove("visible"));
+
+    setTimeout(() => {
+      for (let i = 0; i < productItems.length; i++) {
+        const index = (currentIndex + i) % products.length;
+        const product = products[index];
+        const item = productItems[i];
+
+        item.querySelector(".product-image").src = product.image;
+        item.querySelector(".product-image").alt = product.name;
+        item.querySelector(".product-name").textContent = product.name;
+        item.querySelector(".product-description").textContent = product.description;
+      }
+
+      // Fade in
+      productItems.forEach(item => item.classList.add("visible"));
+      currentIndex = (currentIndex + 3) % products.length;
+    }, 300); // wait for fade out to complete
+  }
+
+  updateProducts(); // initial call
+  setInterval(updateProducts, 30000); // every 30 seconds
 </script>
+
+<!--HarmFree Slogan-->
 <script>
 document.addEventListener("DOMContentLoaded", ()=>{
     const words = ["Humans", "Animals", "Plants", "Planet<sup style='font-size:9px; font-style:bold; vertical-align:0.8em;'>SM</sup>"];
@@ -498,10 +799,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     },2000);
 });
 </script>
+
+<!--Launch Countdown-->
 <script>
 const countdownTimer = document.getElementById('countdown-timer');
 const launchMessage = document.getElementById('launch-message');
-const launchDate = new Date("2025-04-22T00:00:00").getTime();
+// Midnight HST = 2025-04-22T10:00:00Z (UTC time)
+const launchDate = new Date("2025-04-22T10:00:00Z").getTime();
 function updateCountdown(){
     const now = Date.now();
     const dist = launchDate - now;
@@ -518,6 +822,8 @@ function updateCountdown(){
 }
 const interval = setInterval(updateCountdown,1000);
 </script>
+
+<!--Form validation-->
 <script>
 document.getElementById('contact-form').addEventListener('submit', function(e){
     const namePattern = /^[A-Za-z]+$/;
@@ -533,6 +839,12 @@ document.getElementById('contact-form').addEventListener('submit', function(e){
     if(!country.match(namePattern)){ valid=false; msgs.push('Invalid country'); }
     if(!valid){ e.preventDefault(); alert(msgs.join('\n')); }
 });
+</script>
+
+<!--Scrolling Behaviour-->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
 </script>
 </body>
 </html>
