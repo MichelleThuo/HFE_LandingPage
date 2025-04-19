@@ -212,26 +212,28 @@
             border: none;
             outline: none;
             z-index: 11;
-            cursor: pointer;
         }
         .category-spill-container {
             position: absolute;
-            top: 300px;
-            left: 189px;
+            top: 150px;
+            left: 160px;
             width: 280px;
             height: 210px;
             z-index: 12;
-            opacity: 0;
-            visibility: hidden;
-            transform: translate(-40px, -60px) scale(0.5) rotate(-15deg);
-            transform-origin: top left;
-            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), visibility 0s 0.5s;
-        }
-        .cornucopia:hover ~ .category-spill-container {
             opacity: 1;
             visibility: visible;
             transform: translate(0, 0) scale(1) rotate(0deg);
-            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), visibility 0s 0s;
+            transform-origin: top left;
+        }
+        @keyframes spillItemAppear {
+          from {
+            opacity: 0;
+            transform: translateY(10px) rotate(var(--initial-rotate, 0deg)) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--final-rotate, 0deg)) scale(1);
+          }
         }
         .category-item {
             position: absolute;
@@ -246,41 +248,71 @@
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
             transition: transform 0.2s ease-out, border-radius 0.3s ease;
             transform-origin: center center;
+            opacity: 0;
+            animation: spillItemAppear 0.6s ease-out forwards;
         }
         .category-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(var(--final-rotate, 0deg));
             z-index: 100;
         }
-        .category-item:nth-child(1) { top: 5px; left: -5px; border-radius: 90% 40% 50% 85% / 100% 50% 50% 80%; transform: rotate(-30deg) translateX(-10px); z-index: 4; }
-        .category-item:nth-child(2) { top: 35px; left: 5px; border-radius: 70% 45% 50% 65% / 80% 55% 45% 70%; transform: rotate(-15deg); z-index: 5; }
-        .category-item:nth-child(3) { top: 65px; left: 25px; border-radius: 55% 50% 55% 45% / 65% 60% 40% 50%; transform: rotate(3deg); z-index: 6; }
-        .category-item:nth-child(4) { top: 90px; left: 30px; border-radius: 50% 50% 60% 40% / 50% 50% 50% 50%; transform: rotate(12deg); z-index: 7; }
+        .category-item:nth-child(1) {
+            top: 15px; left: 5px;
+            --initial-rotate: -40deg; --final-rotate: -30deg;
+            border-radius: 90% 40% 50% 85% / 100% 50% 50% 80%;
+            transform: rotate(var(--final-rotate));
+            z-index: 4;
+            animation-delay: 0.1s;
+        }
+        .category-item:nth-child(2) {
+            top: 50px; left: 35px;
+             --initial-rotate: -25deg; --final-rotate: -15deg;
+            border-radius: 70% 45% 50% 65% / 80% 55% 45% 70%;
+            transform: rotate(var(--final-rotate));
+            z-index: 5;
+            animation-delay: 0.2s;
+        }
+        .category-item:nth-child(3) {
+            top: 85px; left: 65px;
+            --initial-rotate: -10deg; --final-rotate: 3deg;
+            border-radius: 55% 50% 55% 45% / 65% 60% 40% 50%;
+            transform: rotate(var(--final-rotate));
+            z-index: 6;
+            animation-delay: 0.3s;
+        }
+        .category-item:nth-child(4) {
+            top: 120px; left: 90px;
+            --initial-rotate: 0deg; --final-rotate: 12deg;
+            border-radius: 50% 50% 60% 40% / 50% 50% 50% 50%;
+            transform: rotate(var(--final-rotate));
+            z-index: 7;
+            animation-delay: 0.4s;
+        }
         @media (max-width: 1200px) {
-            .cornucopia { width: 20vw; top: 80px; max-width: 250px; min-width: 100px; transform: rotate(22deg); }
-            .category-spill-container { top: 210px; left: 135px; width: 250px; height: 190px; transform: translate(-40px, -60px) scale(0.5) rotate(-15deg); }
+            .cornucopia { width: 20vw; top: 80px; max-width: 250px; min-width: 100px; transform: rotate(22deg); left: 50px; }
+            .category-spill-container { top: 130px; left: 135px; width: 250px; height: 190px; }
             .category-item { font-size: 0.75em; padding: 7px 13px; }
-            .category-item:nth-child(1) { top: 5px; left: -4px; transform: rotate(-28deg) translateX(-8px); }
-            .category-item:nth-child(2) { top: 32px; left: 2px; transform: rotate(-12deg); }
-            .category-item:nth-child(3) { top: 58px; left: 20px; transform: rotate(5deg); }
-            .category-item:nth-child(4) { top: 80px; left: 25px; transform: rotate(10deg); }
+            .category-item:nth-child(1) { top: 12px; left: 2px; --final-rotate: -28deg; }
+            .category-item:nth-child(2) { top: 45px; left: 30px; --final-rotate: -12deg; }
+            .category-item:nth-child(3) { top: 75px; left: 55px; --final-rotate: 5deg; }
+            .category-item:nth-child(4) { top: 105px; left: 75px; --final-rotate: 10deg; }
         }
         @media (max-width: 768px) {
             .cornucopia { width: 22vw; left: 10px; top: 75px; max-width: 180px; min-width: 90px; transform: rotate(18deg); }
-            .category-spill-container { top: 175px; left: 90px; width: 220px; height: 160px; transform: translate(-40px, -60px) scale(0.5) rotate(-15deg); }
+            .category-spill-container { top: 110px; left: 90px; width: 220px; height: 160px; }
             .category-item { font-size: 0.7em; padding: 6px 10px; }
-            .category-item:nth-child(1) { top: 5px; left: -2px; transform: rotate(-25deg) translateX(-5px); }
-            .category-item:nth-child(2) { top: 30px; left: 5px; transform: rotate(-10deg); }
-            .category-item:nth-child(3) { top: 55px; left: 20px; transform: rotate(8deg); }
-            .category-item:nth-child(4) { top: 75px; left: 25px; transform: rotate(15deg); }
+            .category-item:nth-child(1) { top: 10px; left: 0px; --final-rotate: -25deg; }
+            .category-item:nth-child(2) { top: 40px; left: 25px; --final-rotate: -10deg; }
+            .category-item:nth-child(3) { top: 70px; left: 48px; --final-rotate: 8deg; }
+            .category-item:nth-child(4) { top: 98px; left: 65px; --final-rotate: 15deg; }
         }
         @media (max-width: 576px) {
             .cornucopia { width: 25vw; min-width: 80px; top: 100px; max-width: 150px; transform: rotate(15deg); left: 5px; }
-            .category-spill-container { top: 150px; left: 60px; width: 200px; height: 150px; transform: translate(-40px, -60px) scale(0.5) rotate(-15deg); }
+            .category-spill-container { top: 125px; left: 60px; width: 200px; height: 150px; }
             .category-item { font-size: 0.6em; padding: 5px 8px; }
-            .category-item:nth-child(1) { top: 5px; left: 0px; transform: rotate(-22deg) translateX(-4px); }
-            .category-item:nth-child(2) { top: 28px; left: 2px; transform: rotate(-8deg); }
-            .category-item:nth-child(3) { top: 50px; left: 15px; transform: rotate(10deg); }
-            .category-item:nth-child(4) { top: 70px; left: 20px; transform: rotate(18deg); }
+            .category-item:nth-child(1) { top: 8px; left: -2px; --final-rotate: -22deg; }
+            .category-item:nth-child(2) { top: 35px; left: 20px; --final-rotate: -8deg; }
+            .category-item:nth-child(3) { top: 60px; left: 40px; --final-rotate: 10deg; }
+            .category-item:nth-child(4) { top: 85px; left: 55px; --final-rotate: 18deg; }
         }
 
         /* Coming soon in 2025 styles */
@@ -739,7 +771,7 @@ function closeNavbar(){
     {
       image: "https://dogtorrx.com/wp-content/uploads/2024/07/DogtorRX-AD-bottle-3D.jpg",
       name: "DogtorRX Pet supplement",
-      description: "DogtorRx, clinically tested and veterinarian-approved, uses natural growth factors to rejuvenate aging dogs with orthopedic issues and Cushing’s Disease, supporting lasting health—side-effect free."
+      description: "DogtorRx, clinically tested and veterinarian-approved, uses natural growth factors to rejuvenate aging dogs with orthopedic issues and Cushing's Disease, supporting lasting health—side-effect free."
     },
     {
       image: "https://shop.gtechsport.com/cdn/shop/files/image_13b1767e-04e7-4208-ad83-14904d265a6b_360x.jpg?v=1682440196",
